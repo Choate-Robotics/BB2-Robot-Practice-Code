@@ -11,6 +11,3 @@ class controller():
     def get_x(self):
         # Get x-axis Value
         return self.driver_controller.getRawAxis(4)
-    def get_m(self):
-        # Get magnitude
-        return self.driver_controller.getMagnitude();

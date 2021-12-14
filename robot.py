@@ -20,7 +20,7 @@ class Noelle(wpilib.TimedRobot):
         self.oi = controller()
     def teleopPeriodic(self):
         # Runs every 20 ms when TeleOperated Enabled
-        self.drivetrain.tank_drive(self.oi.get_x(), self.oi.get_y(), self.oi.get_m())
+        self.drivetrain.tank_drive(self.oi.get_x(), self.oi.get_y())
     
 
 if __name__ == "__main__":

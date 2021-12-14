@@ -19,9 +19,42 @@ class DriveTrain(SubsystemBase):
         self.motor_R1.follow(self.motor_R0)
         self.motor_R2.follow(self.motor_R0)
 
-    def tank_drive(self, speed_y, speed_x):
-        self.motor_L0.set(ctre.ControlMode.PercentOutput, speed_y+speed_x)
-        self.motor_R0.set(ctre.ControlMode.PercentOutput, -speed_y+speed_x)
+        self.max_turn_radius = 100
+        self.robot_width = 2
+
+    def sign(num):
+        if num<0:
+            return -1
+        else:
+            return 1
+
+    def tank_drive(self, speed_y:float, speed_turn:float):
+            
+        if speed_turn < .1 and speed_turn > -.1:
+            sL = speed_y
+            sR = speed_y
+        elif speed_y == 0:
+            if speed_turn > .1:
+                sL = speed_turn
+                sR = -speed_turn
+            elif speed_turn < -.1:
+                sL = -speed_turn
+                sR = speed_turn
+        else:
+            rT = (1/speed_turn) * 3
+            print(rT)
+            vDiff = abs((speed_y*2)/rT)
+            rL = rT + .5 * self.robot_width
+            rR = rT - .5 * self.robot_width
+            if abs(rL) > abs(rR):
+                sL = speed_y
+                sR = speed_y - vDiff
+            else:
+                sL = speed_y - vDiff
+                sR = speed_y
+
+        self.motor_L0.set(ctre.ControlMode.PercentOutput, sL)
+        self.motor_R0.set(ctre.ControlMode.PercentOutput, -sR)
         
 
     def periodic(self):

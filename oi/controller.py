@@ -8,3 +8,6 @@ class controller():
     def get_y(self):
         # Get y-axis Value
         return -self.driver_controller.getRawAxis(1) # Multiply by negative 1 so "UP" is Positive
+    def get_turn(self):
+        # Get right joystick x-axis value
+        return self.driver_controller.getRawAxis(4) # TODO Set this value to "x-axis" of right joystick

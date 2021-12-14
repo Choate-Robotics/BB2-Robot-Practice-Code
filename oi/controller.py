@@ -8,3 +8,9 @@ class controller():
     def get_y(self):
         # Get y-axis Value
         return -self.driver_controller.getRawAxis(1) # Multiply by negative 1 so "UP" is Positive
+    def get_x(self):
+        # Get x-axis Value
+        return self.driver_controller.getRawAxis(4)
+    def get_m(self):
+        # Get magnitude
+        return self.driver_controller.getMagnitude();

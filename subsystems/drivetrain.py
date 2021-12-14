@@ -1,6 +1,7 @@
 import wpilib
 from commands2 import CommandBase, SubsystemBase
 import ctre
+import math
 
 class DriveTrain(SubsystemBase):
     def __init__(self):
@@ -19,9 +20,17 @@ class DriveTrain(SubsystemBase):
         self.motor_R1.follow(self.motor_R0)
         self.motor_R2.follow(self.motor_R0)
 
-    def tank_drive(self, speed_y, speed_x):
-        self.motor_L0.set(ctre.ControlMode.PercentOutput, speed_y+speed_x)
-        self.motor_R0.set(ctre.ControlMode.PercentOutput, -speed_y+speed_x)
+    def tank_drive(self, speed_x, speed_y, magnitude):
+        # Turn right: right motors scale down adjust according amount of speed_x pressed
+        p = math.sin(math.pi * speed_x - math.pi / 2)
+        if speed_x >= 0:
+            self.motor_R0.set(ctre.ControlMode.PercentOutput, magnitude * p)
+            self.motor_L0.set(ctre.ControlMode.PercentOutput, magnitude)
+        
+        if speed_x < 0:
+            self.motor_L0.set(ctre.ControlMode.PercentOutput, magnitude * p)
+            self.motor_R0.set(ctre.ControlMode.PercentOutput, magnitude)
+            
         
 
     def periodic(self):

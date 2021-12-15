@@ -1,6 +1,7 @@
 import wpilib
 from commands2 import CommandBase, SubsystemBase
 import ctre
+import math
 
 class DriveTrain(SubsystemBase):
     def __init__(self):
@@ -19,15 +20,26 @@ class DriveTrain(SubsystemBase):
         self.motor_R1.follow(self.motor_R0)
         self.motor_R2.follow(self.motor_R0)
 
-        # Define Tank Drive Variables
-        self.robot_width = 2    # Width of the Robot in Feet
-        self.max_speed = .8     # Max Speed of the Robot
+        # User Define Tank Drive Variables
+        self.robot_width = 22/12    # Width of the Robot in Feet
+        self.max_speed = 1.0     # Max Speed of the Robot
+        self.wheel_diameter = 4
+        
+        # Self-Define Tank Drive Variables
+        self.robot_turn_circumference = math.pi*self.robot_width
+        self.wheel_circumference = math.pi*self.wheel_diameter
 
-    def sign(num):
-        if num<0:
-            return -1
-        else:
-            return 1
+    def auto_angle(self, left_angle, right_angle):  # Input as Degrees
+        left_rad = left_angle*(math.pi/180)
+        right_rad = right_angle*(math.pi/180)
+
+        left_dist = (left_rad/(2*math.pi))*self.robot_turn_circumference
+        right_dist = (right_rad/(2*math.pi))*self.robot_turn_circumference
+
+        left_revolutions = left_dist/self.wheel_circumference
+        right_revolutions = right_dist/self.wheel_circumference
+
+        pass
 
     def tank_drive(self, speed_y:float, speed_turn:float):
             

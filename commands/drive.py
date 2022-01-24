@@ -1,11 +1,12 @@
+import commands2
 import wpilib
-from commands2 import CommandBase, SubsystemBase
-import ctre
-import math
+import ctre, math, time
 
-class DriveTrain(SubsystemBase):
-    def __init__(self):
+class Drive(commands2.CommandBase):
+    
+    def init(self):
         super().__init__()
+        
         # Define Motors
         self.motor_L0 = ctre.TalonSRX(0)
         self.motor_L1 = ctre.VictorSPX(1)
@@ -19,8 +20,10 @@ class DriveTrain(SubsystemBase):
         self.motor_L2.follow(self.motor_L0)
         self.motor_R1.follow(self.motor_R0)
         self.motor_R2.follow(self.motor_R0)
-
-    def tank_drive(self, speed_x, speed_y):
+    
+    def execute(self, speed_x, speed_y):
+        
+        
         # Turn right: right motors scale down adjust according amount of speed_x pressed
         p = math.sin(math.pi * speed_x - math.pi / 2)
         theta = math.atan2(speed_y, speed_x)
@@ -69,7 +72,8 @@ class DriveTrain(SubsystemBase):
             # For going straight
             self.motor_R0.set(ctre.ControlMode.PercentOutput, -magnitude)
             self.motor_L0.set(ctre.ControlMode.PercentOutput, magnitude)
-        
+    
+    
 
-    def periodic(self):
-        pass
+commands2.CommandScheduler.getInstance().schedule(Drive(0, 0.5))
+    

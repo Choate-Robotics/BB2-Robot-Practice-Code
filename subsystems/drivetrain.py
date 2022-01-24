@@ -29,7 +29,13 @@ class DriveTrain(SubsystemBase):
         self.robot_turn_circumference = math.pi*self.robot_width
         self.wheel_circumference = math.pi*self.wheel_diameter
 
-    def auto_angle(self, left_angle, right_angle):  # Input as Degrees
+        # Motor Variables
+        sensor_units_per_radian = 0 # TODO Need to calculate sensor units
+
+    def auto_angle(self, left_angle, right_angle, speed=1):  # Input as Degrees
+
+        # Sensor Units Version
+
         left_rad = left_angle*(math.pi/180)
         right_rad = right_angle*(math.pi/180)
 
@@ -37,9 +43,11 @@ class DriveTrain(SubsystemBase):
         right_dist = (right_rad/(2*math.pi))*self.robot_turn_circumference
 
         left_revolutions = left_dist/self.wheel_circumference
-        right_revolutions = right_dist/self.wheel_circumference
+        right_revolutions = right_dist/self.wheel_circumference   
 
+    def gyro_angle(self, angle:float):
         pass
+
 
     def tank_drive(self, speed_y:float, speed_turn:float):
             

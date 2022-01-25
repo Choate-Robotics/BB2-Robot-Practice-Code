@@ -24,12 +24,17 @@ class santaBot(wpilib.TimedRobot):
         self.shooter = Shooter()
 
     def teleopInit(self) -> None:
-        CommandScheduler.getInstance().schedule()
+        pass
+        #self.shooter.set_speed(.1)
+        #self.shooter.alter_speed(.5)
+        #CommandScheduler.getInstance().schedule()
     def teleopPeriodic(self):
         # Runs every 20 ms when TeleOperated Enabled
         self.drivetrain.tank_drive(self.oi.get_y(), self.oi.get_turn())
-        print(self.shooter.roller_info())
-        self.shooter.set_speed(.5)
+        #self.shooter.set_speed(self.oi.get_right_trigger()*.1+self.shooter.current_speed())
+        self.shooter.controller_based(self.oi.get_left_trigger(), self.oi.get_right_trigger())
+        #print(self.shooter.roller_info())
+        #self.shooter.set_speed(.5)
         
     
 

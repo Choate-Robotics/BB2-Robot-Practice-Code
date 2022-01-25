@@ -12,6 +12,6 @@ class controller():
         # Get right joystick x-axis value (Speed)
         return self.driver_controller.getRawAxis(4)
     def get_left_trigger(self):
-        return self.driver_controller.getRawAxis(5) # TODO
+        return self.driver_controller.getRawAxis(2)
     def get_right_trigger(self):
-        return self.driver_controller.getRawAxis(6) # TODO
+        return self.driver_controller.getRawAxis(3)

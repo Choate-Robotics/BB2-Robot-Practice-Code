@@ -7,7 +7,7 @@ class Shooter(SubsystemBase):
         super().__init__()
 
         # Define Motors
-        self.motor_L = ctre.TalonFX(7)
+        self.motor_L = ctre.TalonFX(4)
         self.motor_R = ctre.TalonFX(8) # TODO
 
         self.current_speed = 0

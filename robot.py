@@ -24,7 +24,7 @@ class santaBot(wpilib.TimedRobot):
         self.oi = controller()
         self.shooter = Shooter()
 
-        #OI.map_commands()
+        OI.map_commands()
 
 
     def teleopInit(self) -> None:

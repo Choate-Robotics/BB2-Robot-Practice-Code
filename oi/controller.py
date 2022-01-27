@@ -2,6 +2,9 @@ import wpilib
 from commands2 import CommandBase, SubsystemBase, _impl
 from robotpy_toolkit_7407.oi import XBoxController, LogitechController, JoystickAxis, DefaultButton
 
+c = LogitechController
+
+
 class controller():
     def __init__(self):
         self.driver_controller = wpilib.Joystick(0)
@@ -15,7 +18,8 @@ class controller():
         return self.driver_controller.getRawAxis(1)
     def get_right_trigger(self):
         return self.driver_controller.getRawAxis(3)
-    #def get_left_bumper(self):
-    #    return _impl.button.Button.JoystickButton(self.driver_controller, 5) # TODO
+    
+    GET_LEFT_BUMPER = DefaultButton(0, 5)
+        #return _impl.button.Button.JoystickButton(self.driver_controller, 5) # TODO
     #def get_right_bumper(self):
     #    return _impl.button.Button.JoystickButton(self.driver_controller, 6) # TODO

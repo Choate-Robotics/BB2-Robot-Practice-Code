@@ -23,3 +23,12 @@ class decrease_speed_increment(commands2.CommandBase):
         print("DECREASED INCREMENT TO:", self.subsystem.increment)
     def isFinished(self) -> bool:
         return True
+
+class stop(commands2.CommandBase):
+    def __init__(self):
+        self.subsystem = Shooter()
+        super().__init__(self.subsystem)
+    def initialize(self):
+        self.subsystem.stop()
+    def isFinished(self) -> bool:
+        return True

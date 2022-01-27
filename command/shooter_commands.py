@@ -6,7 +6,8 @@ class increase_speed_increment(commands2.CommandBase):
     def __init__(self):
         self.subsystem = Shooter()
         self.change_increment = .0001
-        super().__init__(self.subsystem)
+        super().__init__()
+        self.addRequirements(self.subsystem)
     def initialize(self):
         self.subsystem.increment += self.change_increment
         print("INCREASED INCREMENT TO:", self.subsystem.increment)
@@ -17,7 +18,8 @@ class decrease_speed_increment(commands2.CommandBase):
     def __init__(self):
         self.subsystem = Shooter()
         self.change_increment = -.0001
-        super().__init__(self.subsystem)
+        super().__init__()
+        self.addRequirements(self.subsystem)
     def initialize(self):
         self.subsystem.increment += self.change_increment
         print("DECREASED INCREMENT TO:", self.subsystem.increment)
@@ -25,10 +27,12 @@ class decrease_speed_increment(commands2.CommandBase):
         return True
 
 class stop(commands2.CommandBase):
-    def __init__(self):
-        self.subsystem = Shooter()
-        super().__init__(self.subsystem)
+    def __init__(self, subsystem):
+        self.subsystem = subsystem
+        super().__init__()
+        self.addRequirements(self.subsystem)
     def initialize(self):
+        print("STOPPED")
         self.subsystem.stop()
     def isFinished(self) -> bool:
         return True

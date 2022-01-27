@@ -15,6 +15,7 @@ from oi.OI import OI
 from oi.controller import controller
 from subsystems.drivetrain import DriveTrain
 from subsystems.shooter import Shooter
+import command.shooter_commands
 
 class santaBot(wpilib.TimedRobot):
     def robotInit(self):
@@ -24,17 +25,18 @@ class santaBot(wpilib.TimedRobot):
         self.oi = controller()
         self.shooter = Shooter()
 
-        OI.map_commands()
+        OI.map_commands(self.shooter)
 
 
     def teleopInit(self) -> None:
+        CommandScheduler.getInstance().schedule(command.shooter_commands.stop(self.shooter))
         self.shooter.set_speed(.2)
         pass
     def teleopPeriodic(self):
         # Runs every 20 ms when TeleOperated Enabled
         #self.drivetrain.tank_drive(self.oi.get_y(), self.oi.get_turn())
         self.shooter.controller_based(-self.oi.get_left_trigger(), -self.oi.get_right_trigger())
-        print(self.shooter.current_speed)
+        #print(self.shooter.current_speed)
     
 
 if __name__ == "__main__":

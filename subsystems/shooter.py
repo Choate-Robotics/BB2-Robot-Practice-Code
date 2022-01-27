@@ -13,7 +13,7 @@ class Shooter(SubsystemBase):
         self.current_speed = 0
         self.max_speed = 1
 
-        self.increment = .0005
+        self.increment = .005
 
     def limit(self, value):
         if value>self.max_speed:
@@ -27,11 +27,9 @@ class Shooter(SubsystemBase):
         self.motor_L.set(ctre.ControlMode.PercentOutput, -speed)
         self.motor_R.set(ctre.ControlMode.PercentOutput, speed)
         self.current_speed = speed
-        print("Current Speed:", self.current_speed)
 
     def alter_speed(self, speed:float):
         speed = self.limit(speed+self.current_speed)
-        print("Altering:", speed)
         self.set_speed(speed)
 
     def stop(self):

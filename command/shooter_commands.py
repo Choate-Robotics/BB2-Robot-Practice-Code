@@ -32,7 +32,7 @@ class stop(commands2.CommandBase):
         super().__init__()
         self.addRequirements(self.subsystem)
     def initialize(self):
-        print("STOPPED")
+        print("Stopping")
         self.subsystem.stop()
     def isFinished(self) -> bool:
         return True

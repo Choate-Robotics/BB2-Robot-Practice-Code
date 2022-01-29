@@ -1,47 +1,48 @@
-# Tasks
-#   Hello World
-#   Create a DriveTrain Subsystem
-#   Iniatialize Motors, Control Motors
-#   Take in JoyStick Input
-# Create Drive Command
-
-# Import Libraries
 import wpilib
-from commands2 import CommandBase, SubsystemBase, CommandScheduler
-import ctre
+import commands2
+from robotpy_toolkit_7407 import Subsystem
+
 from oi.OI import OI
+from robot_systems import Robot
 
-# Import our Classes
-from oi.controller import controller
-from subsystems.drivetrain import DriveTrain
-from subsystems.shooter import Shooter
-import command.shooter_commands
+from oi.keymap import Keymap
 
 
-class santaBot(wpilib.TimedRobot):
+class _Robot(wpilib.TimedRobot):
+
     def robotInit(self):
-        # Runs once when the robot is enabled
-        print("Delivering Toys")
-        self.drivetrain = DriveTrain()
-        self.oi = controller()
-        self.shooter = Shooter()
 
-        # OI.map_commands(self.shooter)
+        print("Initializing robot...")
+
+        self.oi = Keymap()
+
+        OI.map_controls()
+
+        print("Robot initialized.")
+
+    def robotPeriodic(self):
+        commands2.CommandScheduler.getInstance().run()
 
     def teleopInit(self) -> None:
-        self.shooter.set_speed(1)
-        # CommandScheduler.getInstance().schedule(command.shooter_commands.stop(self.shooter))
-        pass
+        # commands2.CommandScheduler.getInstance().schedule(DriveSwerve(Robot.drivetrain))
+        Robot.shooter.set_speed(.2)
 
-    def teleopPeriodic(self):
-        #self.oi.GET_LEFT_BUMPER.whenPressed(lambda: print("helo"))
-        # Runs every 20 ms when TeleOperated Enabled
-        #self.drivetrain.tank_drive(self.oi.get_y(), self.oi.get_turn())
-        self.shooter.controller_based(-self.oi.get_left_trigger(), -
-                                      self.oi.get_right_trigger())
-        print("Current Speed: ", self.shooter.current_speed)
-        # print(self.shooter.current_speed)
+    def teleopPeriodic(self) -> None:
+        Robot.shooter.controller_based(-self.oi.Shooter.LEFT_JOY(),
+                                       -self.oi.Shooter.RIGHT_JOY())
+
+    def autonomousInit(self) -> None: ...
+
+    def autonomousPeriodic(self) -> None: ...
+
+    def disabledInit(self) -> None: ...
+
+    def disabledPeriodic(self) -> None: ...
+
+    def _simulationInit(self) -> None: ...
+
+    def _simulationPeriodic(self) -> None: ...
 
 
 if __name__ == "__main__":
-    wpilib.run(santaBot)
+    wpilib.run(_Robot)

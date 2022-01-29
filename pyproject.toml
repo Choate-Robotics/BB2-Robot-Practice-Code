@@ -1,15 +1,12 @@
 [tool.poetry]
-name = "bb2-robot-practice-code"
+name = "7407-DriveCode-2021-Python"
 version = "0.1.0"
 description = ""
-authors = ["ethan <ethan.chapman0@outlook.com>"]
+authors = ["Ethan Chapman <ethan.chapman0@outlook.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-robotpy = {extras = ["ctre", "commands2", "rev"], version = "^2022.0.30"}
-robotpy-toolkit-7407 = "^0.1.4"
-
-[tool.poetry.dev-dependencies]
+robotpy-toolkit-7407 = "^0.1.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

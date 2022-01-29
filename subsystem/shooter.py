@@ -1,6 +1,7 @@
 import wpilib
 from commands2 import CommandBase, SubsystemBase
 import ctre
+from oi.keymap import Keymap
 
 
 class Shooter(SubsystemBase):
@@ -14,7 +15,7 @@ class Shooter(SubsystemBase):
         self.current_speed = 0
         self.max_speed = 1
 
-        self.increment = .005
+        self.increment = 0.005
 
     def limit(self, value):
         if value > self.max_speed:
@@ -30,15 +31,22 @@ class Shooter(SubsystemBase):
         self.current_speed = speed
 
     def alter_speed(self, speed: float):
-        speed = self.limit(speed+self.current_speed)
+        speed = self.limit(speed + self.current_speed)
         self.set_speed(speed)
+
+    def alter_increment(self, to_increment: float):
+        self.increment += to_increment
+        print(f"Altered Increment. New Increment: {self.increment}")
 
     def stop(self):
         print("Stopped")
         self.set_speed(0)
 
     def controller_based(self, left_trigger: float, right_trigger: float):
-        if left_trigger > .1 or left_trigger < -.1:
+        print(
+            f"Current Speed: {self.current_speed} ||| Current Increment: {self.increment} ||| LT: {left_trigger>.1} RT: {right_trigger>.1} ||| LB: {Keymap.Shooter.LB} RB: {Keymap.Shooter.RB}||| "
+        )
+        if left_trigger > 0.1 or left_trigger < -0.1:
             self.alter_speed(-self.increment)
-        if right_trigger > .1 or left_trigger < -.1:
+        if right_trigger > 0.1 or left_trigger < -0.1:
             self.alter_speed(self.increment)

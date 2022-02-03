@@ -1,14 +1,9 @@
-# Team 7407 Grabby Robot Code
+# Hallo i am sid
 
-## Subsystems
+You only think I guessed wrong! That's what's so funny! I switched glasses when your back was turned! Ha ha! You fool! You fell victim to one of the classic blunders - The most famous of which is 'never get involved in a land war in Asia' - but only slightly less well-known is this: 'Never go against a Sicilian when death is on the line!'  
 
-### Drivetrain
-The swerve drivetrain on the prototype uses Rev Spark MAX motor controllers, an 
-ADI gyroscope, and _(eventually)_ CTRE CANCoders for zeroing the turn motors.
+AHAHAHAHAHAHA  
+AHAHAHAHAHAHA  
+AHAHAHAHAHAHA  
 
-### Grabber
-This subsystem controls the solenoids responsible for raising and engaging the
-grabber.
-
-### Intake
-This subsystem controls the intake motors on the grabber.
+*dies*

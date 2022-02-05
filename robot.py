@@ -8,7 +8,7 @@ from robot_systems import Robot
 from oi.keymap import Keymap
 
 
-class _Robot(wpilib.TimedRobot):
+class SantaBot(wpilib.TimedRobot):
 
     def robotInit(self):
 
@@ -45,4 +45,4 @@ class _Robot(wpilib.TimedRobot):
 
 
 if __name__ == "__main__":
-    wpilib.run(_Robot)
+    wpilib.run(SantaBot)

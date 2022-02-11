@@ -18,10 +18,11 @@ class Keymap:
        #DRIVE_ROTATION_AXIS = JoystickAxis(Controllers.DRIVER, controller.R_JOY[0])
 
     class Shooter:
-        LB = button.JoystickButton(wpilib.Joystick(Controllers.DRIVER), 5)
-        RB = button.JoystickButton(wpilib.Joystick(Controllers.DRIVER), 6)
-        #LB = DefaultButton(Controllers.DRIVER, controller.LB)
-        #RB = DefaultButton(Controllers.DRIVER, controller.RB)
+        
+        LB = DefaultButton(Controllers.DRIVER, controller.LB)
+        RB = DefaultButton(Controllers.DRIVER, controller.RB)
+        LT = DefaultButton(Controllers.DRIVER, controller.LT)
+        RT = DefaultButton(Controllers.DRIVER, controller.RT)
 
         def LEFT_JOY():
             return wpilib.Joystick(Controllers.DRIVER).getRawAxis(1)

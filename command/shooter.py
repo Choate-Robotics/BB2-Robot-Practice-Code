@@ -4,15 +4,29 @@ from subsystem import Shooter
 
 
 class ShooterIncrementUp(SubsystemCommand[Shooter]):
+    def __init__(self, subsystem: Shooter, increase: bool) -> None:  
+        super().__init__(subsystem)
+        if increase:
+            self.change = .01
+        else:
+            self.change = -.01
+
+    def initialize(self) -> None:
+        self.subsystem.alter_left_speed(self.change)
+
+    def isFinished(self) -> bool:
+        return True
+
+class ShooterIncrementDown(SubsystemCommand[Shooter]):
     def __init__(self, subsystem: Shooter, increase: bool) -> None:
         super().__init__(subsystem)
         if increase:
-            self.change = .001
+            self.change = .01
         else:
-            self.change = -.001
+            self.change = -.01
 
     def initialize(self) -> None:
-        self.subsystem.alter_increment(self.change)
+        self.subsystem.alter_right_speed(self.change)
 
     def isFinished(self) -> bool:
         return True

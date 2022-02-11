@@ -1,1 +1,1 @@
-from command.shooter import ShooterIncrementUp, ShooterStop
+from command.shooter import ShooterIncrementUp, ShooterIncrementDown, ShooterStop

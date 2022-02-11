@@ -43,6 +43,5 @@ class SantaBot(wpilib.TimedRobot):
 
     def _simulationPeriodic(self) -> None: ...
 
-
 if __name__ == "__main__":
     wpilib.run(SantaBot)
